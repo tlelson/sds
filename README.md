@@ -1,7 +1,7 @@
 # Simple Data Store
 
 [![Go Report Card](https://goreportcard.com/badge/schafer14/sds?style=flat-square)](https://goreportcard.com/report/schafer14/sds)
-[![Go Reference](https://pkg.go.dev/badge/schafer14/sds.svg)](https://pkg.go.dev/schafer14/sds)
+[![Go Reference](https://pkg.go.dev/badge/github.com/schafer14/sds.svg)](https://pkg.go.dev/github.com/schafer14/sds)
 [![LICENSE](https://img.shields.io/github/license/schafer14/sds.svg?style=flat-square)](https://github.com/schafer14/sds/blob/master/LICENSE)
 
 Simple Data Store (sds) is a simple storage interface I use that allows me 
@@ -29,7 +29,7 @@ plan to use. They are in the [./wiki/how-tos](how to) directory.
 - [Getting started guide](./wiki/getting-started.md)
 - [How to documentation](./wiki/how-tos)
 - [API reference](https://pkg.go.dev/schafer14/sds)
-- [Explanations](./wiki/explantions)
+- [Explanations](./wiki/explanations)
 
 ## Feedback
 

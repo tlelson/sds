@@ -5,7 +5,7 @@ import "context"
 // Repo provides a way of storeing a generic Go item in a database.
 type Repo[A any] interface {
 	Find(ctx context.Context, id string) (A, error)
-	Save(ctx context.Context, dh A) error
+	Save(ctx context.Context, item A) error
 	Query(ctx context.Context, opts ...QueryOption) ([]A, Cursor, error)
 	Delete(ctx context.Context, id string) error
 }
