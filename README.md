@@ -22,13 +22,13 @@ for Firestore and Dynamo in the future, but only as the need arises. If you
 would like a database to be supported please leave a comment.
 
 I recommending quickly reading the "how to" notes for any implementation you 
-plan to use. They are in the [./wiki/how-tos](how to) directory.
+plan to use. They are in the [how to](./wiki/how-tos) directory.
 
 ## More Information 
 
 - [Getting started guide](./wiki/getting-started.md)
 - [How to documentation](./wiki/how-tos)
-- [API reference](https://pkg.go.dev/schafer14/sds)
+- [API reference](https://pkg.go.dev/github.com/schafer14/sds)
 - [Explanations](./wiki/explanations)
 
 ## Feedback

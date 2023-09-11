@@ -22,11 +22,11 @@ func (u user) GetID() string { return u.ID }
 
 func main() {
 
-    // Setup the storage repository 
-    ctx := context.Background()
+	// Setup the storage repository 
+	ctx := context.Background()
 	userRepo := mem.New[user]()
 
-    // Save an item
+	// Save an item
 	id := ksuid.New().String()
 	err := userRepo.Save(ctx, user{
 		ID:    id,
@@ -47,4 +47,4 @@ func main() {
 ```
 
 This is a simple example to get you started. For more in-depth thoughts on 
-how this library can facilitate domain driven development read [this article](./wiki/how-tos/domain-service.md).
+how this library can facilitate domain driven development read [this article](../wiki/how-tos/domain-service.md).
