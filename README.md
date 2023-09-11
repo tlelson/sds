@@ -26,10 +26,10 @@ plan to use. They are in the [./wiki/how-tos](how to) directory.
 
 ## More Information 
 
-- [./wiki/getting-started.md](Getting started guide)
-- [./wiki/how-tos](How to documentation)
-- [https://pkg.go.dev/schafer14/sds](API reference)
-- [./wiki/explantions](Explanations)
+- [Getting started guide](./wiki/getting-started.md)
+- [How to documentation](./wiki/how-tos)
+- [API reference](https://pkg.go.dev/schafer14/sds)
+- [Explanations](./wiki/explantions)
 
 ## Feedback
 
