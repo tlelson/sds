@@ -47,6 +47,8 @@ func (f *memRepo[A]) Query(ctx context.Context, opts ...sds.QueryOption) ([]A, s
 		if options.Cursor() == nil {
 			values = append(values, item)
 		} else if item.GetID() < *options.Cursor() && options.Descending() {
+			// Did you deliberately use the `GetID` function here rather than the key of the
+			// f.items map ?
 			values = append(values, item)
 		} else if item.GetID() > *options.Cursor() && !options.Descending() {
 			values = append(values, item)

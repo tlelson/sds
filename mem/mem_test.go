@@ -26,6 +26,8 @@ func TestMemRepo(t *testing.T) {
 	ctx := context.Background()
 	store := mem.New[*someEnt]()
 
+	// Can DoesItWork provide its own generic entity? Must be unique for a given
+	// backend database?
 	test.DoesItWork(t, ctx, store, func(s string) error {
 		return store.Save(ctx, &someEnt{s})
 

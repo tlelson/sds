@@ -36,6 +36,7 @@ func WithLimit(n int) QueryOption {
 
 // Entity is an interface that some implementations will need to support
 // to index items in a database.
+// just 'some' ?  Is there others that won't? Why not?
 type Entity interface {
 	GetID() string
 }
