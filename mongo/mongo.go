@@ -27,11 +27,7 @@ func New[A sds.Entity](db *mongo.Collection) (sds.Repo[A], error) {
 func (s *service[A]) Find(ctx context.Context, id string) (A, error) {
 	var item A
 	err := s.db.FindOne(ctx, bson.D{{Key: "_id", Value: id}}).Decode(&item)
-	if err != nil {
-		return item, err
-	}
-
-	return item, nil
+	return item, err
 }
 
 func (s *service[A]) Save(ctx context.Context, item A) error {

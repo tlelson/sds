@@ -3,31 +3,27 @@ package test
 import (
 	"context"
 	"fmt"
-	"sort"
 	"testing"
 
 	"github.com/schafer14/sds"
 )
 
 func DoesItWork[A sds.Entity](t *testing.T, ctx context.Context, s sds.Repo[A], save func(string) error) {
+	// Save 100 records
+	N := 100
 
-	list := []string{}
-	reversed := []string{}
+	list := make([]string, N)
+	reversed := make([]string, N)
 
-	for i := 0; i < 100; i++ {
-
+	for i := 0; i < N; i++ {
 		id := fmt.Sprintf("%.2d", i)
-		list = append(list, id)
-		reversed = append(reversed, id)
+		list[i] = id
+		reversed[N-1-i] = id
 		err := save(id)
 		if err != nil {
 			t.Errorf("saving item %v : %v", id, err)
 		}
 	}
-
-	sort.Slice(reversed, func(i, j int) bool {
-		return reversed[j] < reversed[i]
-	})
 
 	t.Run("fetches items by id", func(_ *testing.T) {
 		first, err := s.Find(ctx, "00")

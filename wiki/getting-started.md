@@ -12,6 +12,15 @@ Here is an example:
 ```go
 package main
 
+import (
+	"context"
+	"testing"
+
+	"github.com/matryer/is"
+	"github.com/schafer14/sds/mem"
+	"github.com/segmentio/ksuid"
+)
+
 type user struct {
 	ID     string `bson:"_id"`
 	Name   string `bson:"name"`
@@ -20,7 +29,8 @@ type user struct {
 
 func (u user) GetID() string { return u.ID }
 
-func main() {
+func TestGettingStarted(t *testing.T) {
+	is := is.New(t)
 
 	// Setup the storage repository 
 	ctx := context.Background()
