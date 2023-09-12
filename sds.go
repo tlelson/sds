@@ -2,7 +2,7 @@ package sds
 
 import "context"
 
-// Repo provides a way of storeing a generic Go item in a database.
+// Repo provides a way of storing a generic Go item in a database.
 type Repo[A any] interface {
 	Find(ctx context.Context, id string) (A, error)
 	Save(ctx context.Context, item A) error
@@ -20,7 +20,7 @@ func WithCursor(cursor Cursor) QueryOption {
 	}
 }
 
-// Desending returns the query results in desending order based on creation time.
+// Descending returns the query results in desending order based on creation time.
 func Descending() QueryOption {
 	return func(o *opt) {
 		o.descending = true
