@@ -13,19 +13,6 @@ import (
 	"go.etcd.io/bbolt"
 )
 
-type wrappedEntity struct {
-	ID    string
-	Field string
-}
-
-func (w *wrappedEntity) GetID() string {
-	return w.ID
-}
-
-func (w *wrappedEntity) String() string {
-	return w.ID
-}
-
 func TestBboltDB(t *testing.T) {
 
 	t.Parallel()
@@ -37,15 +24,10 @@ func TestBboltDB(t *testing.T) {
 	is.NoErr(err)
 	defer db.Close()
 
-	store, err := bboltStorage.New[*wrappedEntity](db, ksuid.New().String())
+	store, err := bboltStorage.New[test.Entity](db, ksuid.New().String())
 	is.NoErr(err)
 
-	test.DoesItWork(t, ctx, store, func(id string) error {
-		return store.Save(ctx, &wrappedEntity{
-			ID:    id,
-			Field: id,
-		})
-	})
+	test.DoesItWork(t, ctx, store)
 
 }
 
@@ -60,10 +42,10 @@ func TestBboltDBDataStructure(t *testing.T) {
 	is.NoErr(err)
 	defer db.Close()
 
-	store, err := bboltStorage.New[*wrappedEntity](db, ksuid.New().String())
+	store, err := bboltStorage.New[test.Entity](db, ksuid.New().String())
 	is.NoErr(err)
 
-	err = store.Save(ctx, &wrappedEntity{
+	err = store.Save(ctx, test.Entity{
 		ID:    "abc",
 		Field: "123",
 	})

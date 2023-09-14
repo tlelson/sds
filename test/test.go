@@ -8,7 +8,21 @@ import (
 	"github.com/schafer14/sds"
 )
 
-func DoesItWork[A sds.Entity](t *testing.T, ctx context.Context, s sds.Repo[A], save func(string) error) {
+type Entity struct {
+	ID    string `bson:"_id"`
+	Field string
+}
+
+func (entity Entity) GetID() string {
+	return entity.ID
+}
+
+func (entity Entity) String() string {
+	return entity.ID
+}
+
+func DoesItWork(t *testing.T, ctx context.Context, s sds.Repo[Entity]) {
+
 	// Save 100 records
 	N := 100
 
@@ -19,7 +33,7 @@ func DoesItWork[A sds.Entity](t *testing.T, ctx context.Context, s sds.Repo[A], 
 		id := fmt.Sprintf("%.2d", i)
 		list[i] = id
 		reversed[N-1-i] = id
-		err := save(id)
+		err := s.Save(ctx, Entity{id, id})
 		if err != nil {
 			t.Errorf("saving item %v : %v", id, err)
 		}

@@ -3,6 +3,7 @@ package mongo_test
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/matryer/is"
 	"github.com/segmentio/ksuid"
@@ -14,23 +15,10 @@ import (
 	"github.com/schafer14/sds/test"
 )
 
-type entity struct {
-	ID    string `bson:"_id"`
-	Field string
-}
-
-func (entity *entity) GetID() string {
-	return entity.ID
-}
-
-func (entity *entity) String() string {
-	return entity.ID
-}
-
 func TestMongoDB(t *testing.T) {
 
 	t.Parallel()
-	ctx := context.Background()
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	is := is.New(t)
 	uri := "mongodb://localhost:27017"
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
@@ -38,21 +26,17 @@ func TestMongoDB(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
+		cancel()
 		if err := client.Disconnect(context.TODO()); err != nil {
 			t.Fatal(err)
 		}
 	}()
 	coll := client.Database("test").Collection("test_" + ksuid.New().String())
 
-	store, err := mongoStorage.New[*entity](coll)
+	store, err := mongoStorage.New[test.Entity](coll)
 	is.NoErr(err)
 
-	test.DoesItWork(t, ctx, store, func(id string) error {
-		return store.Save(ctx, &entity{
-			ID:    id,
-			Field: id,
-		})
-	})
+	test.DoesItWork(t, ctx, store)
 
 }
 
@@ -73,10 +57,10 @@ func TestMongoDBDataStructure(t *testing.T) {
 	}()
 	coll := client.Database("test").Collection("test_" + ksuid.New().String())
 
-	store, err := mongoStorage.New[*entity](coll)
+	store, err := mongoStorage.New[test.Entity](coll)
 	is.NoErr(err)
 
-	err = store.Save(ctx, &entity{
+	err = store.Save(ctx, test.Entity{
 		ID:    "abc",
 		Field: "123",
 	})
